@@ -51,6 +51,12 @@
           <span class="menu-item-subheading">IMDB</span>
         </a>
       </li>
+      <li :class="{ active: currentView === 'pottan' }">
+        <a href="#/pottan">
+          <span class="menu-item-heading">Pottan Main Menu</span>
+          <span class="menu-item-subheading">Ocr subhead</span>
+        </a>
+      </li>
     </ul>
     <p class="menu-label">Links</p>
     <ul class="menu-list github">

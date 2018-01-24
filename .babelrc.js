@@ -8,6 +8,8 @@ if (process.env.BABEL_ENV === 'node') {
 if (process.env.BABEL_ENV === 'browser') {
   envOpts.targets = { browsers: ['>0.5%'] }
   envOpts.modules = false
+  envOpts.exclude= [ 'transform-regenerator' ]
+
   envOpts.useBuiltIns = 'entry'
 }
 

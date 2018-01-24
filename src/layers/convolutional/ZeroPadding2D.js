@@ -4,6 +4,7 @@ import { webgl2 } from '../../WebGL2'
 import ops from 'ndarray-ops'
 import mapInputProgramSource from '../../webgl/mapInput.glsl'
 
+window.ndarrayOps = ops
 /**
  * ZeroPadding2D layer class
  */

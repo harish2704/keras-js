@@ -177,6 +177,10 @@ export default class _Pooling2D extends Layer {
           nbColInPadding = j + nbCol - (inputCols - paddingColAfter)
         }
         const nbCellsEffective = (nbRow - nbRowInPadding) * (nbCol - nbColInPadding)
+        if( nbCellsEffective === 0 ){
+          debugger;
+          console.log('nbCellsEffective went wrong' );
+        }
 
         ops.assign(patch.tensor, x.tensor.hi(i + nbRow, j + nbCol, inputChannels).lo(i, j, 0))
         for (let c = 0; c < inputChannels; c++) {

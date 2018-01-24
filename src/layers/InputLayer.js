@@ -44,9 +44,9 @@ export default class InputLayer extends Layer {
    */
   _callCPU(x) {
     this.inputShape = x.tensor.shape
-    if (!_.isEqual(this.inputShape, this.shape)) {
-      this.throwError(`input tensor shape ${x.tensor.shape} does not match specified shape ${this.shape}.`)
-    }
+    // if (!_.isEqual(this.inputShape, this.shape)) {
+      // this.throwError(`input tensor shape ${x.tensor.shape} does not match specified shape ${this.shape}.`)
+    // }
     this.output = new Tensor(x.tensor.data, x.tensor.shape)
   }
 

@@ -36,6 +36,11 @@ const DEMO_INFO = [
     title: 'Bidirectional LSTM for IMDB sentiment classification',
     path: 'imdb-bidirectional-lstm',
     imagePath: 'demos/assets/imdb-bidirectional-lstm.png'
+  },
+  {
+    title: 'Pottan',
+    path: 'pottan',
+    imagePath: 'demos/assets/imdb-bidirectional-lstm.png'
   }
 ]
 

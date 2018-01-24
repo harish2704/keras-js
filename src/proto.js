@@ -13,19 +13,20 @@ export const Weights = $root.Weights = (() => {
      * Properties of a Weights.
      * @exports IWeights
      * @interface IWeights
-     * @property {string} [layerName] Weights layerName
-     * @property {string} [weightName] Weights weightName
-     * @property {Array.<number>} [shape] Weights shape
-     * @property {string} [type] Weights type
-     * @property {Uint8Array} [data] Weights data
-     * @property {number} [quantizeMin] Weights quantizeMin
-     * @property {number} [quantizeMax] Weights quantizeMax
+     * @property {string|null} [layerName] Weights layerName
+     * @property {string|null} [weightName] Weights weightName
+     * @property {Array.<number>|null} [shape] Weights shape
+     * @property {string|null} [type] Weights type
+     * @property {Uint8Array|null} [data] Weights data
+     * @property {number|null} [quantizeMin] Weights quantizeMin
+     * @property {number|null} [quantizeMax] Weights quantizeMax
      */
 
     /**
      * Constructs a new Weights.
      * @exports Weights
      * @classdesc Represents a Weights.
+     * @implements IWeights
      * @constructor
      * @param {IWeights=} [properties] Properties to set
      */
@@ -39,7 +40,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights layerName.
-     * @member {string}layerName
+     * @member {string} layerName
      * @memberof Weights
      * @instance
      */
@@ -47,7 +48,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights weightName.
-     * @member {string}weightName
+     * @member {string} weightName
      * @memberof Weights
      * @instance
      */
@@ -55,7 +56,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights shape.
-     * @member {Array.<number>}shape
+     * @member {Array.<number>} shape
      * @memberof Weights
      * @instance
      */
@@ -63,7 +64,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights type.
-     * @member {string}type
+     * @member {string} type
      * @memberof Weights
      * @instance
      */
@@ -71,7 +72,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights data.
-     * @member {Uint8Array}data
+     * @member {Uint8Array} data
      * @memberof Weights
      * @instance
      */
@@ -79,7 +80,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights quantizeMin.
-     * @member {number}quantizeMin
+     * @member {number} quantizeMin
      * @memberof Weights
      * @instance
      */
@@ -87,7 +88,7 @@ export const Weights = $root.Weights = (() => {
 
     /**
      * Weights quantizeMax.
-     * @member {number}quantizeMax
+     * @member {number} quantizeMax
      * @memberof Weights
      * @instance
      */
@@ -360,18 +361,19 @@ export const Model = $root.Model = (() => {
      * Properties of a Model.
      * @exports IModel
      * @interface IModel
-     * @property {string} [id] Model id
-     * @property {string} [name] Model name
-     * @property {string} [kerasVersion] Model kerasVersion
-     * @property {string} [backend] Model backend
-     * @property {string} [modelConfig] Model modelConfig
-     * @property {Array.<IWeights>} [modelWeights] Model modelWeights
+     * @property {string|null} [id] Model id
+     * @property {string|null} [name] Model name
+     * @property {string|null} [kerasVersion] Model kerasVersion
+     * @property {string|null} [backend] Model backend
+     * @property {string|null} [modelConfig] Model modelConfig
+     * @property {Array.<IWeights>|null} [modelWeights] Model modelWeights
      */
 
     /**
      * Constructs a new Model.
      * @exports Model
      * @classdesc Represents a Model.
+     * @implements IModel
      * @constructor
      * @param {IModel=} [properties] Properties to set
      */
@@ -385,7 +387,7 @@ export const Model = $root.Model = (() => {
 
     /**
      * Model id.
-     * @member {string}id
+     * @member {string} id
      * @memberof Model
      * @instance
      */
@@ -393,7 +395,7 @@ export const Model = $root.Model = (() => {
 
     /**
      * Model name.
-     * @member {string}name
+     * @member {string} name
      * @memberof Model
      * @instance
      */
@@ -401,7 +403,7 @@ export const Model = $root.Model = (() => {
 
     /**
      * Model kerasVersion.
-     * @member {string}kerasVersion
+     * @member {string} kerasVersion
      * @memberof Model
      * @instance
      */
@@ -409,7 +411,7 @@ export const Model = $root.Model = (() => {
 
     /**
      * Model backend.
-     * @member {string}backend
+     * @member {string} backend
      * @memberof Model
      * @instance
      */
@@ -417,7 +419,7 @@ export const Model = $root.Model = (() => {
 
     /**
      * Model modelConfig.
-     * @member {string}modelConfig
+     * @member {string} modelConfig
      * @memberof Model
      * @instance
      */
@@ -425,7 +427,7 @@ export const Model = $root.Model = (() => {
 
     /**
      * Model modelWeights.
-     * @member {Array.<IWeights>}modelWeights
+     * @member {Array.<IWeights>} modelWeights
      * @memberof Model
      * @instance
      */

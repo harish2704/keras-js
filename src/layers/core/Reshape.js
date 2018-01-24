@@ -46,12 +46,28 @@ export default class Reshape extends Layer {
     return this.output
   }
 
+  computeTargetShape( outputshape ){
+    const targetShape = this.targetShape;
+
+    const numOfUnknowns = targetShape.filter( v => v === -1 ).length;
+    if( numOfUnknowns === 0 ){
+      return;
+    }
+    if( numOfUnknowns !== 1 ){
+      throw new Error('Can not handle more than one number of unknown in Reshape');
+    }
+    const validDims = targetShape.filter( v => v !== -1 )
+    const totalSize = outputshape.reduce( (a,b) => a*b , 1 )
+    targetShape[ targetShape.indexOf(-1) ] = totalSize/ validDims.reduce( (a,b) => a*b , 1)
+  }
+
   /**
    * CPU call
    *
    * @param {Tensor} x
    */
   _callCPU(x) {
+    this.computeTargetShape( x.tensor.shape );
     if (this.targetShape.reduce((a, b) => a * b, 1) !== x.tensor.size) {
       this.throwError('The total size of new array must be unchanged in reshape layer.')
     }
@@ -115,6 +131,7 @@ export default class Reshape extends Layer {
    * @param {Tensor} x
    */
   _callGPU(x) {
+    this.computeTargetShape( x.tensor.shape );
     if (!x.glTexture) {
       this.inputShape = x.tensor.shape
       if (x.tensor.shape.length <= 2) {

@@ -18,7 +18,17 @@
     "type": "git",
     "url": "git+https://github.com/transcranial/keras-js.git"
   },
-  "keywords": ["keras", "deep", "learning", "neural", "networks", "javascript", "webgl", "webgl2", "gpu"],
+  "keywords": [
+    "keras",
+    "deep",
+    "learning",
+    "neural",
+    "networks",
+    "javascript",
+    "webgl",
+    "webgl2",
+    "gpu"
+  ],
   "author": "Leon Chen <leon@md.ai>",
   "license": "MIT",
   "bugs": {
@@ -34,9 +44,12 @@
     "lodash": "^4.17.4",
     "ndarray": "^1.0.18",
     "ndarray-blas-level2": "^1.1.0",
+    "ndarray-concat-cols": "^1.0.0",
     "ndarray-concat-rows": "^1.0.1",
     "ndarray-gemm": "^1.0.0",
+    "ndarray-imshow": "^1.0.1",
     "ndarray-ops": "^1.2.2",
+    "ndarray-pack": "^1.2.1",
     "ndarray-resample": "^1.0.1",
     "ndarray-squeeze": "^1.0.2",
     "ndarray-tile": "^1.0.3",

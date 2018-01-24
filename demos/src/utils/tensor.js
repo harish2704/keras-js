@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import unpack from 'ndarray-unpack'
 
+window.ndarrayUnpack = unpack
+
 /**
  * calculates mean and stddev for a ndarray tensor
  */

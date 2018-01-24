@@ -151,9 +151,13 @@ export default class Model {
     // run predict once with initial empty input tensors to cache variables such as shape inference
     this.inputLayerNames.forEach(name => {
       const inputLayer = this.modelLayersMap.get(name)
-      inputLayer.call(this.inputTensorsMap.get(name))
-      inputLayer.hasOutput = true
-      inputLayer.visited = true
+      let inputTensor = this.inputTensorsMap.get(name)
+      if( ( inputTensor.tensor.shape.indexOf( null ) !== -1 ) ){
+        inputTensor = new Tensor( [], inputTensor.tensor.shape.map( v=> v === null ? 32: v ))
+      }
+      // inputLayer.call( inputTensor )
+      // inputLayer.hasOutput = true
+      // inputLayer.visited = true
     })
 
     // always turn on `pauseAfterLayerCalls` during initialization
@@ -468,13 +472,37 @@ export default class Model {
         if (!_.every(_.map(inboundLayers, 'hasOutput'))) {
           return false
         }
-
+        const prevLayer = inboundLayers[0];
+        let currentInput = prevLayer.output;
+        // if( currentLayer.name === 'conv1' ){
+          // debugger;
+        // }
         if (currentLayer.isMergeLayer) {
           currentLayer.call(_.map(inboundLayers, 'output'))
         } else {
-          currentLayer.call(inboundLayers[0].output)
+          currentLayer.call( currentInput )
+        }
+        if( currentLayer.output.tensor.data.includes(NaN) ){
+          console.log(`Output of ${currentLayer.name} has NaN`);
+        }
+        if( currentLayer.output.tensor.data.includes(Infinity) ){
+          console.log(`Output of ${currentLayer.name} has Infinity`);
         }
 
+        if( window.pottanRunning && ( node === 'conv0---' ) ){
+          var opshape = currentLayer.output.tensor.shape;
+          var found = range( opshape[0] ).map( i => currentLayer.output.tensor.pick(null, null,i) );
+          var expected = range( opshape[0] ).map( i=> tdebug[0].data.pick(0,i) );
+          imshow( concatcols( expected ) , { colormap: 'bluered'} )
+          imshow( concatcols( found ) , { colormap: 'bluered'} )
+
+          // for (var i = 0; i < opshape[0]; i ++) {
+            // var expected = tdebug[0].data.pick(0,i),
+              // found = currentLayer.output.tensor.pick(i);
+            // imshow( concatcols( [ expected, found ] ) , { colormap: 'bluered'} )
+          // }
+          // debugger;
+        }
         currentLayer.hasOutput = true
         currentLayer.visited = true
         this.finishedLayerNames.push(currentLayer.name)
@@ -546,10 +574,12 @@ export default class Model {
           JSON.stringify(this.inputLayerNames)
       )
     }
-    if (!_.every(this.inputLayerNames, name => inputData[name] instanceof Float32Array)) {
-      this.isRunning = false
-      throw new Error('[Model] predict() must take an object where the values are the flattened data as Float32Array.')
-    }
+    // We will pass Tensor directly
+    //
+    // if (!_.every(this.inputLayerNames, name => inputData[name] instanceof Float32Array)) {
+      // this.isRunning = false
+      // throw new Error('[Model] predict() must take an object where the values are the flattened data as Float32Array.')
+    // }
 
     // reset hasOutput and visited flags in all layers
     this.finishedLayerNames = []

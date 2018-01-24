@@ -110,9 +110,9 @@ export default class Conv2D extends Layer {
    * @param {Tensor[]} weightsArr - array of weights which are instances of Tensor
    */
   setWeights(weightsArr) {
-    if (this.dataFormat === 'channels_first') {
-      weightsArr[0].tensor = weightsArr[0].tensor.transpose(2, 3, 1, 0)
-    }
+    // if (this.dataFormat === 'channels_first') {
+      // weightsArr[0].tensor = weightsArr[0].tensor.transpose(2, 3, 1, 0)
+    // }
     super.setWeights(weightsArr, false)
 
     this._w2row()
@@ -293,6 +293,9 @@ export default class Conv2D extends Layer {
    * @param {Tensor} x
    */
   _callCPU(x) {
+    if( this.dataFormat === 'channels_first' ){
+      x.tensor = x.tensor.transpose(1,2,0);
+    }
     this.inputShape = x.tensor.shape
     this._calcOutputShape(this.inputShape)
     x = this._padInput(x)
@@ -325,6 +328,7 @@ export default class Conv2D extends Layer {
 
     // convert back to channels_first ordering if necessary
     if (this.dataFormat === 'channels_first') {
+      x.tensor = x.tensor.transpose(2, 0, 1)
       this.output.tensor = this.output.tensor.transpose(2, 0, 1)
     }
   }
