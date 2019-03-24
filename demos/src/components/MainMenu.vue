@@ -51,12 +51,23 @@
           <span class="menu-item-subheading">IMDB</span>
         </a>
       </li>
+      <li :class="{ active: currentView === 'image-super-resolution' }">
+        <a href="#/image-super-resolution">
+          <span class="menu-item-heading">Image Super-Resolution</span>
+          <span class="menu-item-subheading"></span>
+        </a>
+      </li>
     </ul>
     <p class="menu-label">Links</p>
     <ul class="menu-list github">
       <li>
         <a href="https://github.com/transcranial/keras-js" target="_blank" rel="noopener noreferrer">
           <span class="menu-item-heading"><v-icon>fa-github</v-icon> GitHub repo</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.md.ai" target="_blank" rel="noopener noreferrer">
+          <span class="menu-item-heading"><v-icon>link</v-icon> MD.ai</span>
         </a>
       </li>
     </ul>
